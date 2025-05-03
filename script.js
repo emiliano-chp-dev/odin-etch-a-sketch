@@ -24,7 +24,7 @@ function main() {
             if (target.classList.contains('set_board')) {
                 makeBoard();
             } else if (target.classList.contains('reset_board')) {
-                resetBoard();
+                setBoard();
             } else if (target.classList.contains('clean_board')) {
                 cleanBoard();
             }
