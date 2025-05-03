@@ -27,6 +27,8 @@ function main() {
                 setBoard();
             } else if (target.classList.contains('clean_board')) {
                 cleanBoard();
+            } else if (target.classList.contains('set_color_mode')) {
+                setColorMode(event);
             }
         })
     }
@@ -84,6 +86,14 @@ function main() {
         target.style.backgroundColor = '#000';
         target.style.opacity = '1';
     })
+
+    // Sets the color mode
+    function setColorMode(event) {
+        event.target.classList.toggle('grayscale');
+        event.target.classList.toggle('color');
+
+        return [...event.target.classList].at(-1);
+    }
 
     // ...
 }
