@@ -7,12 +7,28 @@ function main() {
 
     // Core functions
     setBoard();
+    delegateButtonFunctionality();
 
     // Sets the default board
     function setBoard(num=16) {
         resetBoard();
         const tiles = createTilesGroup(num);
         appendTiles(tiles);
+    }
+
+    // Delegates functions to buttons
+    function delegateButtonFunctionality() {
+        controlPanelElement.addEventListener('click', (event) => {
+            let target = event.target;
+    
+            if (target.classList.contains('set_board')) {
+                makeBoard();
+            } else if (target.classList.contains('reset_board')) {
+                resetBoard();
+            } else if (target.classList.contains('clean_board')) {
+                cleanBoard();
+            }
+        })
     }
 
     // Empties the board
@@ -42,8 +58,24 @@ function main() {
     function appendTiles(tiles) {
         tiles.forEach(tile => boardElement.appendChild(tile));
     }
+
+    // Creates a new board based on user's input
+    function makeBoard() {
+        let inputString = prompt('How many cells per side? 1-100');
+
+        let inputNum = parseInt(inputString);
+
+        setBoard(inputNum);
+    }
+
+    // Cleans the background color from tiles
+    function cleanBoard() {
+        const tileGroup = Array.from(document.querySelectorAll('.tile'));
+
+        tileGroup.forEach((tile) => { tile.style.backgroundColor = ''; })
+    }
     
-    // Delegate event listeners to tiles
+    // Delegates event listeners to tiles
     boardElement.addEventListener('mouseover', (event) => {
         const target = event.target;
 
