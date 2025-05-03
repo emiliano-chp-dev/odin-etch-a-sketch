@@ -16,6 +16,11 @@ function main() {
         appendTiles();
     }
 
+    // Empties the board
+    function resetBoard() {
+        boardElement.innerHTML = '';
+    }
+
     // ...
 }
 
