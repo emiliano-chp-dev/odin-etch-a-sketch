@@ -43,6 +43,15 @@ function main() {
         tiles.forEach(tile => boardElement.appendChild(tile));
     }
     
+    // Delegate event listeners to tiles
+    boardElement.addEventListener('mouseover', (event) => {
+        const target = event.target;
+
+        if (!target.classList.contains('tile')) return;
+
+        target.style.backgroundColor = '#000';
+        target.style.opacity = '1';
+    })
 
     // ...
 }
