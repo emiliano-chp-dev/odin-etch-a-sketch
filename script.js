@@ -77,22 +77,19 @@ function main() {
         tileGroup.forEach((tile) => { tile.style.backgroundColor = ''; })
     }
     
-    // Delegates event listeners to tiles
-    boardElement.addEventListener('mouseover', (event) => {
-        const target = event.target;
-
-        if (!target.classList.contains('tile')) return;
-
-        target.style.backgroundColor = '#000';
-        target.style.opacity = '1';
-    })
-
     // Sets the color mode
     function setColorMode(event) {
         event.target.classList.toggle('grayscale');
         event.target.classList.toggle('color');
 
         return [...event.target.classList].at(-1);
+    }
+
+    // Returns a random colro hex code
+    function getRandomColor() {
+        let randomColor = '#' + (Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
+
+        return randomColor;
     }
 
     // ...
