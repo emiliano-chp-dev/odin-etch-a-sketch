@@ -5,9 +5,13 @@ function main() {
     const controlPanelElement = document.querySelector('.control_panel');
     const boardElement = document.querySelector('.board');
 
+    // Variables
+    let colorMode = 'grayscale';
+
     // Core functions
     setBoard();
     delegateButtonFunctionality();
+    colorTiles();
 
     // Sets the default board
     function setBoard(num=16) {
@@ -81,17 +85,29 @@ function main() {
     function setColorMode(event) {
         event.target.classList.toggle('grayscale');
         event.target.classList.toggle('color');
+        colorMode = [...event.target.classList].at(-1);
+        console.log(colorMode);
+    }
 
-        return [...event.target.classList].at(-1);
+    // Colors tiles based on color mode
+    function colorTiles() {
+        boardElement.addEventListener('mouseover', (event) => {
+            if (!event.target.classList.contains('tile')) return;
+
+            if (colorMode === 'grayscale') {
+                event.target.style.backgroundColor = '#000';
+            } else if (colorMode === 'color'){
+                console.log(1);
+                event.target.style.backgroundColor = `${getRandomColor()}`;
+            }
+        });
     }
 
     // Returns a random colro hex code
     function getRandomColor() {
         let randomColor = '#' + (Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
-
         return randomColor;
     }
-
     // ...
 }
 
