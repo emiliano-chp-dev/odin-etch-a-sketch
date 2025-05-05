@@ -7,6 +7,7 @@ function main() {
 
     // Variables
     let colorMode = 'grayscale';
+    let fillMode = 'solid';
 
     // Core functions
     setBoard();
@@ -33,6 +34,8 @@ function main() {
                 cleanBoard();
             } else if (target.classList.contains('set_color_mode')) {
                 setColorMode(event);
+            } else if (target.classList.contains('fill_mode')) {
+                toggleFillMode(event);
             }
         })
     }
@@ -97,8 +100,13 @@ function main() {
             if (colorMode === 'grayscale') {
                 event.target.style.backgroundColor = '#000';
             } else if (colorMode === 'color'){
-                console.log(1);
                 event.target.style.backgroundColor = `${getRandomColor()}`;
+            }
+
+            if (fillMode !== 'increment') {
+                event.target.style.opacity = 1;
+            } else {
+                incrementOpacity(event.target);
             }
         });
     }
@@ -108,7 +116,21 @@ function main() {
         let randomColor = '#' + (Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
         return randomColor;
     }
-    // ...
+
+    // Toggles fill mode
+    function toggleFillMode(event) {
+        const isIncrement = event.target.classList.toggle('increment');
+        fillMode = isIncrement ? 'increment' : 'solid';
+        console.log(fillMode);
+    }
+
+    // Increments opacity
+    function incrementOpacity(elem) {
+        let currentOpacity = parseFloat(elem.style.opacity) || 0;
+        if (currentOpacity < 1) {
+            elem.style.opacity = (currentOpacity + 0.1).toFixed(1);
+        }
+    }
 }
 
 main();
